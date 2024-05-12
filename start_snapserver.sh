@@ -27,7 +27,7 @@ base_ip="${addr_parts[0]}.${addr_parts[1]}.${addr_parts[2]}."
 
 # Run arp-scan on the entire subnet
 echo "Scanning the network for used IPs..."
-scan_results=$(sudo arp-scan --interface=$interface --localnet)
+scan_results=$(arp-scan --interface=$interface --localnet)
 
 # Function to check if IP is in the arp-scan results
 function ip_in_use() {
