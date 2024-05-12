@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  snapcast:
+    image: docker.io/sweisgerber/snapcast:latest
+    hostname: snapcast
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    networks:
+      macvlan_network:
+        ipv4_address: { ip_address }
+    volumes:
+      - ./snapcast/config/:/config/
+      - ./snapcast/data/:/data/
+
+networks:
+  macvlan_network:
+    driver: macvlan
+    driver_opts:
+      parent: { interface }
+    ipam:
+      config:
+        - subnet: { subnet }
+          gateway: { gateway }
+          ip_range: { ip_range }
